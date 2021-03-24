@@ -4,7 +4,7 @@ import { db, auth } from './firebase';
 import Post from './Components/Post/Post';
 import { Modal, Button, Input } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
+import ImageUpload from './Components/ImageUpload/ImageUpload';
 const useStyles = makeStyles(theme => ({
   paper: {
     position: 'absolute',
@@ -36,60 +36,68 @@ function App() {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [user, setUser] = useState(null);
+
+  console.log('USER', user);
   useEffect(() => {
-    db.collection('posts').onSnapshot(snapshot => {
-      setPosts(
-        snapshot.docs.map(doc => ({
-          id: doc.id,
-          post: doc.data(),
-        }))
-      );
-    });
+    db.collection('posts')
+      .orderBy('timestamp', 'desc')
+      .onSnapshot(snapshot => {
+        setPosts(
+          snapshot.docs.map(doc => ({
+            id: doc.id,
+            post: doc.data(),
+          }))
+        );
+      });
   }, []);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(authUser => {
       if (authUser) {
-        //user has logged in
-        console.log(authUser);
+        // if user has logged in...
         setUser(authUser);
       } else {
-        //user has logged out
+        // if user has logged out...
         setUser(null);
       }
     });
+
     return () => {
-      //perform clean up actions
+      // perform some cleanup actions
       unsubscribe();
     };
   }, [user, username]);
 
   const signUp = event => {
-    event.PreventDefault();
-
+    event.preventDefault();
     auth
       .createUserWithEmailAndPassword(email, password)
       .then(authUser => {
         return authUser.user.updateProfile({
-          displayUser: username,
+          displayName: username,
         });
       })
       .catch(error => alert(error.message));
-
     setOpen(false);
   };
 
   const signIn = event => {
-    event.PreventDefault();
+    event.preventDefault();
     auth
       .signInWithEmailAndPassword(email, password)
       .catch(error => alert(error.message));
 
     setOpenSignIn(false);
   };
-
+  console.log(posts);
   return (
     <div className='app'>
+      {user?.displayName ? (
+        <ImageUpload username={user.displayName} />
+      ) : (
+        <h3>Sorry you need to login to upload</h3>
+      )}
+
       {/*//Sign Up*/}
       <Modal open={open} onClose={() => setOpen(false)}>
         <div style={modalStyle} className={classes.paper}>
@@ -167,11 +175,11 @@ function App() {
         <Button onClick={() => auth.signOut()}>Log out</Button>
       ) : (
         <div className='app__loginContainer'>
-          <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+          <Button onClick={() => setOpenSignIn(true)}>Login</Button>
           <Button onClick={() => setOpen(true)}>Sign up</Button>
         </div>
       )}
-      {posts.map((post, id) => (
+      {posts.map(({ post, id }) => (
         <Post
           key={id}
           imageUrl={post.imageUrl}

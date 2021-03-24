@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Post.css';
 import { Avatar } from '@material-ui/core';
 function Post({ username, caption, imageUrl }) {
+  console.log('USERNAME', username);
+  console.log('IMAGE', imageUrl);
+  console.log('CAPTION', caption);
   return (
     <div className='post'>
       <div className='post__header'>
-        <Avatar className='post__avatar' alt={username} src={imageUrl} />
+        <Avatar className='post__avatar' alt={username} />
         <h3>{username}</h3>
       </div>
 
