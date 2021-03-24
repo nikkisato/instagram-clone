@@ -190,9 +190,12 @@ function App() {
 
       <footer>
         {user?.displayName ? (
-          <ImageUpload username={user.displayName} />
+          <>
+            <h3 className='app__footerUpload'>Upload</h3>
+            <ImageUpload username={user.displayName} />
+          </>
         ) : (
-          <h3>Sorry you need to login to upload</h3>
+          <h3 className='app__footerText'>Sorry you need to login to upload</h3>
         )}
       </footer>
     </div>

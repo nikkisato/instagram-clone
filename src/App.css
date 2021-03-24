@@ -58,3 +58,18 @@ footer {
   background-color: lightgray;
   width: 100%;
 }
+
+.app__footerText {
+  text-align: center;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.app__footerUpload {
+  text-align: center;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
