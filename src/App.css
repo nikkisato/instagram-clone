@@ -25,3 +25,11 @@
   cursor: pointer;
   width: 115px;
 }
+
+.app__signup {
+  display: flex;
+  flex-direction: column;
+}
+
+.app__loginContainer {
+}
