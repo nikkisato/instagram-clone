@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
-
+import Post from './Components/Post/Post';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <div className='app__header'>
+        <img
+          className='app__headerImage'
+          src='https://1000logos.net/wp-content/uploads/2017/02/Instagram-Logo.png'
+          alt='instagram logo'
+        />
+      </div>
+
+      <Post
+        imageUrl='https://res.cloudinary.com/practicaldev/image/fetch/s--54ca_F2q--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://dev-to-uploads.s3.amazonaws.com/i/1wwdyw5de8avrdkgtz5n.png'
+        username='nikkisato'
+        caption='WOW'
+      />
+      <Post />
+      <Post />
     </div>
   );
 }
