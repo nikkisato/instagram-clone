@@ -92,12 +92,6 @@ function App() {
   console.log(posts);
   return (
     <div className='app'>
-      {user?.displayName ? (
-        <ImageUpload username={user.displayName} />
-      ) : (
-        <h3>Sorry you need to login to upload</h3>
-      )}
-
       {/*//Sign Up*/}
       <Modal open={open} onClose={() => setOpen(false)}>
         <div style={modalStyle} className={classes.paper}>
@@ -170,23 +164,37 @@ function App() {
           src='https://1000logos.net/wp-content/uploads/2017/02/Instagram-Logo.png'
           alt='instagram logo'
         />
+        {user ? (
+          <>
+            <Button onClick={() => auth.signOut()}>Log out</Button>
+          </>
+        ) : (
+          <div className='app__loginContainer'>
+            <Button onClick={() => setOpenSignIn(true)}>Login</Button>
+            <Button onClick={() => setOpen(true)}>Sign up</Button>
+          </div>
+        )}
       </div>
-      {user ? (
-        <Button onClick={() => auth.signOut()}>Log out</Button>
-      ) : (
-        <div className='app__loginContainer'>
-          <Button onClick={() => setOpenSignIn(true)}>Login</Button>
-          <Button onClick={() => setOpen(true)}>Sign up</Button>
-        </div>
-      )}
-      {posts.map(({ post, id }) => (
-        <Post
-          key={id}
-          imageUrl={post.imageUrl}
-          caption={post.caption}
-          username={post.username}
-        />
-      ))}
+      <div className='app__posts'>
+        {posts.map(({ post, id }) => (
+          <Post
+            user={user}
+            key={id}
+            postId={id}
+            imageUrl={post.imageUrl}
+            caption={post.caption}
+            username={post.username}
+          />
+        ))}
+      </div>
+
+      <footer>
+        {user?.displayName ? (
+          <ImageUpload username={user.displayName} />
+        ) : (
+          <h3>Sorry you need to login to upload</h3>
+        )}
+      </footer>
     </div>
   );
 }

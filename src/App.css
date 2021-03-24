@@ -4,8 +4,25 @@
 
 .app {
   background-color: #fafafa;
-  height: 100vh;
+  margin-bottom: 120px;
 }
+
+.app__posts {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.app__postsRight {
+  margin-left: 20px;
+}
+/*
+.floating {
+  position: absolute;
+  position: -webkit-sticky;
+  position: sticky;
+}
+*/
 
 .app__header {
   background-color: white;
@@ -22,8 +39,12 @@
 .app__headerImage {
   object-fit: contain;
   flex: 0;
-  cursor: pointer;
   width: 115px;
+}
+
+.app__loginContainer {
+  display: flex;
+  float: right;
 }
 
 .app__signup {
@@ -31,5 +52,9 @@
   flex-direction: column;
 }
 
-.app__loginContainer {
+footer {
+  position: fixed;
+  bottom: 0;
+  background-color: lightgray;
+  width: 100%;
 }
