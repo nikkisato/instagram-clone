@@ -13,19 +13,22 @@
   justify-content: center;
 }
 
-.app__postsRight {
-  margin-left: 20px;
-}
-/*
-.floating {
-  position: absolute;
-  position: -webkit-sticky;
-  position: sticky;
-}
-*/
-
 .app__header {
-  background-color: white;
+  background-image: linear-gradient(
+    to right,
+    #ea1152,
+    #ea0068,
+    #e50081,
+    #d9009a,
+    #c600b3,
+    #b518c1,
+    #a128ce,
+    #8635db,
+    #743ddf,
+    #6044e2,
+    #4749e4,
+    #1e4ee6
+  );
   padding: 20px;
   border-bottom: 1px solid lightgray;
   object-fit: contain;
@@ -57,6 +60,21 @@ footer {
   bottom: 0;
   background-color: lightgray;
   width: 100%;
+  background-image: linear-gradient(
+    to right,
+    #ea1152,
+    #ea0068,
+    #e50081,
+    #d9009a,
+    #c600b3,
+    #b518c1,
+    #a128ce,
+    #8635db,
+    #743ddf,
+    #6044e2,
+    #4749e4,
+    #1e4ee6
+  );
 }
 
 .app__footerText {
@@ -68,6 +86,7 @@ footer {
 }
 .app__footerUpload {
   text-align: center;
+  color: white;
   height: 30px;
   justify-content: center;
   align-items: center;
