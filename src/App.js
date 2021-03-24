@@ -1,6 +1,14 @@
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import { db } from './firebase';
 import Post from './Components/Post/Post';
 function App() {
+  useEffect(() => {
+    db.collection('posts').onSnapshot(snapshot => {
+      setPosts(snapshot.docs.map(doc => doc.data()));
+    });
+  }, []);
+  const [posts, setPosts] = useState([]);
   return (
     <div className='app'>
       <div className='app__header'>
@@ -11,13 +19,14 @@ function App() {
         />
       </div>
 
-      <Post
-        imageUrl='https://res.cloudinary.com/practicaldev/image/fetch/s--54ca_F2q--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://dev-to-uploads.s3.amazonaws.com/i/1wwdyw5de8avrdkgtz5n.png'
-        username='nikkisato'
-        caption='WOW'
-      />
-      <Post />
-      <Post />
+      {posts.map((post, i) => (
+        <Post
+          key={i}
+          imageUrl={post.imageUrl}
+          caption={post.caption}
+          username={post.username}
+        />
+      ))}
     </div>
   );
 }
